@@ -62,7 +62,8 @@
                         this.isLogin = false
                         console.log(res.data)
                     }).catch((err: any) => {
-                        this.isLogin = true
+                        this.isLogin = false
+                        console.log(this.isLogin)
                         console.log(err)
                     });
                 }
