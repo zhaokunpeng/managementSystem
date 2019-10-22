@@ -17,7 +17,7 @@
                 </el-form-item>
 
                 <el-form-item>
-                    <el-button type="primary" style="width: 100%" @click="login">登录</el-button>
+                    <el-button :loading="isLogin" type="primary" style="width: 100%" @click="login">登录</el-button>
                 </el-form-item>
 
                 <el-form-item>
@@ -37,6 +37,7 @@
         }
     })
     export default class Login extends Vue{
+        @Provide() isLogin: boolean = false
         @Provide() ruleForm:{
             username: string,
             pass: string,
@@ -53,10 +54,17 @@
         }
 
         login(): void{
-
             (this.$refs['ruleForm'] as any).validate((valid:boolean)=>{
                 if(valid){
-                    console.log('校验通过')
+//                    console.log('校验通过')
+                    this.isLogin = true;
+                    (this as any).$axios.post('/api/users/login',this.ruleForm).then((res: any)=>{
+                        this.isLogin = false
+                        console.log(res.data)
+                    }).catch((err: any) => {
+                        this.isLogin = true
+                        console.log(err)
+                    });
                 }
             })
         }
