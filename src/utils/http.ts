@@ -1,5 +1,6 @@
 import axios, {AxiosResponse, AxiosRequestConfig} from "axios"
 import { Message } from 'element-ui'
+import router from '@/router/index'
 /**
  * http请求工具类
  *
@@ -16,6 +17,9 @@ const service = axios.create({
 
 service.interceptors.request.use((config: AxiosRequestConfig)=>
 {
+    if(localStorage.tsToken){
+        config.headers.Authorization = localStorage.tsToken
+    }
     return config
 },(error: any)=>{
     Promise.reject(error)
@@ -31,8 +35,8 @@ service.interceptors.response.use((response: AxiosResponse)=>
         switch (error.response.status) {
             case 401:
                 errMsg = '登录状态失效，请重新登录';
-                // localStorage.removeItem('tsToken');
-                // router.push('/login');
+                localStorage.removeItem('tsToken');
+                router.push('/login');
                 break;
             case 403:
                 errMsg = '拒绝访问';

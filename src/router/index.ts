@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
+const routes: any = [
     {
         path: '/',
         name: 'home',
@@ -21,6 +21,7 @@ const routes = [
         component: () => import('@/views/Login/Password.vue')
     }
 ]
+
 
 const router = new VueRouter({
   mode: 'history',

@@ -60,7 +60,7 @@
                     this.isLogin = true;
                     (this as any).$axios.post('/api/users/login',this.ruleForm).then((res: any)=>{
                         this.isLogin = false
-
+                        localStorage.setItem('tsToken', res.data.token);
                     }).catch((err: any) => {
                         this.isLogin = false
                     });
