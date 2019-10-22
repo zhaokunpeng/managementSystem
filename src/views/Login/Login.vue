@@ -10,8 +10,8 @@
                         <i slot="prefix" class="fa fa-user-o"></i>
                     </el-input>
                 </el-form-item>
-                <el-form-item prop="pass">
-                    <el-input type="password" v-model="ruleForm.pass" auto-complete="off" placeholder="密码">
+                <el-form-item prop="pwd">
+                    <el-input type="password" v-model="ruleForm.pwd" auto-complete="off" placeholder="密码">
                         <i slot="prefix" class="fa fa-lock"></i>
                     </el-input>
                 </el-form-item>
@@ -40,17 +40,17 @@
         @Provide() isLogin: boolean = false
         @Provide() ruleForm:{
             username: string,
-            pass: string,
+            pwd: string,
             autoLogin: boolean
         } = {
             username: '',
-            pass: '',
+            pwd: '',
             autoLogin: true
         }
 
         @Provide() rules = {
             username:[{ required: true, message: '请输入账号', trigger: 'blur' },],
-            pass:[{ required: true, message: '请输入密码', trigger: 'blur' },]
+            pwd:[{ required: true, message: '请输入密码', trigger: 'blur' },]
         }
 
         login(): void{
@@ -60,11 +60,9 @@
                     this.isLogin = true;
                     (this as any).$axios.post('/api/users/login',this.ruleForm).then((res: any)=>{
                         this.isLogin = false
-                        console.log(res.data)
+
                     }).catch((err: any) => {
                         this.isLogin = false
-                        console.log(this.isLogin)
-                        console.log(err)
                     });
                 }
             })
