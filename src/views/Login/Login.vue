@@ -22,7 +22,7 @@
 
                 <el-form-item>
                     <el-checkbox v-model="ruleForm.autoLogin" :checked="ruleForm.autoLogin">7天内免密码登录</el-checkbox>
-                    <el-button type="text" class="forget" @click="$router.push('/Password')">忘记密码？</el-button>
+                    <el-button type="text" class="forget" @click="$router.push('/password')">忘记密码？</el-button>
                 </el-form-item>
             </el-form>
         </login-header>
@@ -30,6 +30,7 @@
 </template>
 <script lang="ts">
     import {Component, Vue, Provide} from 'vue-property-decorator'
+    import { State, Getter, Mutation, Action } from "vuex-class";
     import LoginHeader from './LoginHeader.vue'
     @Component({
         components:{
@@ -37,6 +38,10 @@
         }
     })
     export default class Login extends Vue{
+
+        // 存储用户信息
+        @Action("setUser") setUser: any;
+
         @Provide() isLogin: boolean = false
         @Provide() ruleForm:{
             username: string,
@@ -61,6 +66,11 @@
                     (this as any).$axios.post('/api/users/login',this.ruleForm).then((res: any)=>{
                         this.isLogin = false
                         localStorage.setItem('tsToken', res.data.token);
+
+                        // 存储到vuex中
+                        this.setUser(res.data.token);
+                        //登陆成功后跳转首页
+                        this.$router.push('/')
                     }).catch((err: any) => {
                         this.isLogin = false
                     });
