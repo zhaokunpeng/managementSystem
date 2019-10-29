@@ -66,7 +66,6 @@
                     (this as any).$axios.post('/api/users/login',this.ruleForm).then((res: any)=>{
                         this.isLogin = false
                         localStorage.setItem('tsToken', res.data.token);
-
                         // 存储到vuex中
                         this.setUser(res.data.token);
                         //登陆成功后跳转首页

@@ -1,5 +1,6 @@
+import { asyncRouterMap } from '../router/index'
 const state: any = {
   user: null,
-  routers: []
+  routers: asyncRouterMap
 };
 export default state;
