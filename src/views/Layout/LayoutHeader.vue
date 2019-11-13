@@ -37,6 +37,9 @@
                 localStorage.removeItem('tsToken')
                 this.$router.push('/login')
             }
+            if(command == 'usercentre'){
+                this.$router.push('/user')
+            }
         }
         created(){
 

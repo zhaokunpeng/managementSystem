@@ -7,9 +7,10 @@
 
 <script lang="ts">
 import { Component, Vue, Provide } from "vue-property-decorator";
-//import AddAccount from "./AddAccount.vue";
+import AddAccount from "./AddAccount.vue";
 @Component({
-  components: {  }
+  name:'accountData',
+  components: { AddAccount }
 })
 export default class AccountData extends Vue {
 

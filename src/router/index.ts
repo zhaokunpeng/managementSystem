@@ -47,7 +47,7 @@ export const asyncRouterMap = [
                 meta: {
                     title: '表单管理',
                     icon: 'fa fa-file-text-o',
-                    roles: ['admin', 'editor']
+                    roles: ['admin', 'editor']                   //判断权限为admin和editor才可以看到
                 },
                 component: () => import('@/views/DataManage/FormData.vue')
             }
@@ -63,7 +63,7 @@ export const asyncRouterMap = [
             {
                 path: '/accountData',
                 name: 'accountData',
-                meta: { title: '账户管理', icon: 'fa fa-user-plus', roles: ['admin'] },
+                meta: { title: '账户管理', icon: 'fa fa-user-plus', roles: ['admin'] },     //roles判断权限为admin才可以看到
                 component: () => import('@/views/UserManage/AccountData.vue')
             }
         ]
